@@ -1,0 +1,17 @@
+.videoEditor {
+  margin: 20px auto;
+  width: 80%;
+  margin-top: 5%;
+}
+.formGroup {
+  margin: 5% 0;
+}
+.inputRoot {
+  width: 100%
+}
+@media (min-width: 700px) {
+  .videoEditor {
+    width: 600px;
+    margin-top: 5%;
+  }
+}
