@@ -103,7 +103,7 @@ const VideoEditor: React.FC<Props> = ({ match, history }: RouteComponentProps<{ 
     newVideos.push(newVideo);
     author.videos = newVideos;
     saveAuthor(author).then((res)=>{
-      // idk how the result will look like 
+      // redirect to home page 
       redirectToHome();
     });
   };

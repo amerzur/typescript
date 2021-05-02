@@ -4,7 +4,7 @@ import { ProcessedVideo, Video, Author, Category } from '../common/interfaces';
 import { ensure, setVideoResolution } from '../common/helper-functions';
 export const getVideos = (): Promise<ProcessedVideo[]> => {
   return Promise.all([getCategories(), getAuthors()]).then(([categories, authors]) => {
-    // TODO: implement
+    // implement
 
     // Loop through all auther's videos , convert them to ProcessedVideos 
     // then concatinate it in one Array using reduce function
@@ -15,7 +15,7 @@ export const getVideos = (): Promise<ProcessedVideo[]> => {
       const procVideos = authorVideos as unknown as ProcessedVideo[];
 
       // loop through every author Video to convert it correctly to ProcessedVideo
-       authorVideos.map((authorVideo) => {
+      authorVideos && authorVideos.map((authorVideo) => {
         const procVideo: ProcessedVideo = convertToProcessedVideo(authorVideo, author, categories)
         return procVideo;
       });
