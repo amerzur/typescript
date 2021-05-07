@@ -66,12 +66,11 @@ const VideoEditor: React.FC<Props> = ({ match, history }: RouteComponentProps<{ 
       setLoading(true);
       // to make sure that authors & categories are loaded from the server
       if (authors.length > 0 && categories.length > 0) {
-        // get video
-        getVideo(videoID, categories, authors).then((data) => {
-          console.log('ProcessedVideo:', data);
-          changeToEdit(data);
-          setLoading(false);
-        });
+        // get ProcessedVideo
+        const ProcessedVideo = getVideo(videoID, categories, authors);
+        console.log({ ProcessedVideo });
+        changeToEdit(ProcessedVideo);
+        setLoading(false);
       }
     };
 
@@ -89,6 +88,7 @@ const VideoEditor: React.FC<Props> = ({ match, history }: RouteComponentProps<{ 
     }
     setFormIsValid(formIsValid);
   }, [formFields]);
+
   const redirectToHome = () => {
     history.push('/');
   };
@@ -96,17 +96,20 @@ const VideoEditor: React.FC<Props> = ({ match, history }: RouteComponentProps<{ 
   const videoSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
 
-    //todo:send save Author API call
+    // Since there is no table for ProcessedVideo , I will change selected author video's data to save new Video
     const author: Author = ensure(authors.find((author) => author.id === +selectedAuthor));
     const newVideos: Video[] = [...author.videos];
     const newVideo: Video = { id: Math.round(Math.random() * 10), name: name, catIds: (selectedCategories as unknown) as number[] };
     newVideos.push(newVideo);
     author.videos = newVideos;
-    saveAuthor(author).then((res)=>{
-      // redirect to home page 
+
+    //
+    saveAuthor(author).then((res) => {
+      // redirect to home page
       redirectToHome();
     });
   };
+
   const cancelClickedHandler = () => {
     redirectToHome();
   };

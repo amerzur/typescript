@@ -5,7 +5,6 @@ export const getAuthors = (): Promise<Author[]> => {
 };
 
 export const saveAuthor = (authorData: Author): Promise<Author> => {
-  // I tryed to send POST & PUT on the local server but seems it didn't work
-  // if i call send POST or PUT  request will cause side effects to the DB 
+  // Unfortunatly if i send POST or PUT to localhost:3001 will not save records correctly & cause side effects to the DB ..
   return Promise.resolve({} as any as Author);
 }
